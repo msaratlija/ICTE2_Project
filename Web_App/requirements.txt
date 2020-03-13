@@ -4,7 +4,7 @@ Jinja2==2.10
 requests==2.22.0
 itsdangerous==1.1.0
 click==7.0
-Werkzeug==0.15.1
+Werkzeug==0.15.3
 MarkupSafe==1.1.1
 certifi==2019.11.28
 idna==2.8
