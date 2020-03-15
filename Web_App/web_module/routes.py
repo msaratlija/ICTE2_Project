@@ -1,15 +1,13 @@
 from flask import render_template, request, Blueprint, url_for
 from flask_login import login_required, logout_user
-import flask_login
 from werkzeug.utils import redirect
 from .login import authenticate_user
-from .model import User
 
 login_usr = Blueprint('login_usr', __name__, template_folder='templates', static_folder='static')
 
 
 @login_usr.route('/')
-@flask_login.login_required
+@login_required
 def hello_show():
     return render_template('main_page.html')
 

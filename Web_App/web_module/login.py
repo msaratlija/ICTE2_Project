@@ -1,33 +1,33 @@
-
-
 from flask import url_for
 from flask_login import current_user, login_user
+
+from werkzeug.security import check_password_hash
 from werkzeug.utils import redirect
-from . import login_manager
+
+from web_module import login_manager
 from .model import User
 
 
-new_usr = User('ddd', 1, True)
-
-
 def authenticate_user(request):
+    if current_user.is_authenticated:
+        return redirect(url_for('login_usr.hello_show'))
 
     if request.method == 'POST':
-        username = request.form['username']
-        if current_user.is_authenticated:
-            return redirect(url_for('login_usr.hello_show'))
-        if username == new_usr.username:
-            login_user(new_usr)
+        username = request.form['username']  # test username "ddd"
+        password = request.form['password']  # test password "ddd"
+        user = User().get_by_username(username)
+
+        if user is not None and check_password_hash(user.db_user.password_hash, password):
+            login_user(user)
             return redirect(url_for('login_usr.hello_show'))
         else:
             return redirect(url_for('login_usr.login_show'))
     return None
 
+
 @login_manager.user_loader
 def load_user(user_id):
-    if user_id is not None:
-        return new_usr
-    return None
+    return User().get_by_id(user_id)
 
 
 @login_manager.unauthorized_handler
