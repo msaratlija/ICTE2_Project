@@ -53,7 +53,6 @@ def check_username():
 
 @login_usr.route('/sign_up_user', methods=['POST'])
 def sign_up_user():
-    print("success post")
     try:
         new_user = UserDB()
         new_user.username = request.form['sign_username']
@@ -65,8 +64,6 @@ def sign_up_user():
         new_user.date_created = datetime.now()
         new_user.save()
         login_user(User(new_user))
-
-        print("parameter in post: " + new_usr_pass)
         return jsonify(result=True)
     except Exception as e:
         return str(e)
