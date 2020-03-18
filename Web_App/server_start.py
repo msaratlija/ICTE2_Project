@@ -1,5 +1,4 @@
 from web_module import init_app
 
 app = init_app()
-app.run()
-app.run(host='0.0.0.0', debug=True)
+app.run(host='127.0.0.1', port=80)

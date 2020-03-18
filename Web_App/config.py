@@ -10,3 +10,5 @@ class Config:
     DB_NAME = 'consent_management'
     DB_COLL_USERS = 'users'
     SALT_LENGTH = 16
+    DEBUG = True
+    ENV = 'development'
