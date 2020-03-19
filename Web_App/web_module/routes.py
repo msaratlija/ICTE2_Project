@@ -1,9 +1,8 @@
-from datetime import datetime
-
 from flask import render_template, request, Blueprint, url_for, jsonify
 from flask_login import login_required, logout_user, login_user
 from werkzeug.security import generate_password_hash
 from werkzeug.utils import redirect
+from datetime import datetime
 
 from .login import authenticate_user
 from .model import User, UserDB
