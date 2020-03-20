@@ -1,2 +1,2 @@
-Web_App/static/css/vendor/* linguist-vendored=true
-Web_App/static/js/vendor/* linguist-vendored=true
+web_module/static/css/vendor/* linguist-vendored=true
+web_module/static/js/vendor/* linguist-vendored=true
