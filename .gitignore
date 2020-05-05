@@ -17,5 +17,8 @@
 **/.idea/**/uiDesigner.xml
 **/.idea/**/dbnavigator.xml
 
+# Visual Studio
+.vs/
+
 # Bytecode
 **/__pycache__/

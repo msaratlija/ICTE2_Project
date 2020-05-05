@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Popup</title>
+  <link rel="stylesheet" href="/static/css/bootstrap.css">
+  <link rel="stylesheet" href="/static/css/all.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+
+
+
+
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">Consent Management</h5>
+
+            <ul class="list-inline">
+              <li class="list-inline-item text-muted">Username:</li>
+              <li class="list-inline-item">xxxxusername</li>
+            </ul>
+
+            <div>
+              <button id="my-consents" class="btn btn-lg btn-primary btn-block">My Consents<i
+                  class="con-icon fas fa-arrow-right"></i></button>
+            </div>
+
+            <div>
+              <p class="text-muted">Enable or Disable Consent Tracking:</p>
+              <ul class="list-inline">
+                <label class="switch">
+                  <input type="checkbox" checked>
+                  <span class="slider round"></span>
+                </label>
+                <button id="log-out" class="btn btn-outline-primary">Logout<i id="log-out-icon" class="fas fa-sign-out-alt"></i></button>
+              </ul>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="/static/js/jquery-3.4.1.js"></script>
+  <script type="text/javascript" src="/static/js/bootstrap.bundle.js"></script>
+  <!--old <script type="text/javascript" src="/static/js/script.js"></script>  -->
+  <script src="popup_home.js"></script>
+
+</body>
+
+</html>
