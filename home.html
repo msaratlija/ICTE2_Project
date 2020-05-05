@@ -7,9 +7,6 @@
   <link rel="stylesheet" href="/static/css/all.css">
   <link rel="stylesheet" href="/static/css/style.css">
 
-
-
-
 </head>
 
 <body>
@@ -23,12 +20,13 @@
 
             <ul class="list-inline">
               <li class="list-inline-item text-muted">Username:</li>
-              <li class="list-inline-item">xxxxusername</li>
+              <li id="logged-user" class="list-inline-item"></li>
             </ul>
 
             <div>
-              <button id="my-consents" class="btn btn-lg btn-primary btn-block">My Consents<i
-                  class="con-icon fas fa-arrow-right"></i></button>
+              <a id="my-consents" class="btn btn-lg btn-primary btn-block" href=""
+                target="_blank">My Consents<i class="con-icon fas fa-arrow-right"></i></a>
+                <!-- // URL REPLACE  --> 
             </div>
 
             <div>
@@ -38,7 +36,8 @@
                   <input type="checkbox" checked>
                   <span class="slider round"></span>
                 </label>
-                <button id="log-out" class="btn btn-outline-primary">Logout<i id="log-out-icon" class="fas fa-sign-out-alt"></i></button>
+                <button id="log-out" class="btn btn-outline-primary">Logout<i id="log-out-icon"
+                    class="fas fa-sign-out-alt"></i></button>
               </ul>
             </div>
 
@@ -51,8 +50,8 @@
 
   <script type="text/javascript" src="/static/js/jquery-3.4.1.js"></script>
   <script type="text/javascript" src="/static/js/bootstrap.bundle.js"></script>
-  <!--old <script type="text/javascript" src="/static/js/script.js"></script>  -->
-  <script src="popup_home.js"></script>
+  <script type="text/javascript" src="endpoint_urls.js"></script>
+  <script type="text/javascript" src="popup_home.js"></script>
 
 </body>
 

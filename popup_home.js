@@ -3,20 +3,22 @@
 // found in the LICENSE file.
 
 /**
- * This class wraps the popup's form, and performs the proper clearing of data
- * based on the user's selections. It depends on the form containing a single
- * select element with an id of 'timeframe', and a single button with an id of
- * 'button'. When you write actual code you should probably be a little more
- * accepting of variance, but this is just a sample app. :)
- *
- * Most of this is boilerplate binding the controller to the UI. The bits that
- * specifically will be useful when using the BrowsingData API are contained in
- * `parseMilliseconds_`, `handleCallback_`, and `handleClick_`.
+ * This class wraps the popup's form
  *
  * @constructor
  */
 var PopupController = function () {
+    var my_consents = document.getElementById("my-consents");
+    my_consents.href = web_url.home
+
     this.log_out_btn = document.getElementById('log-out');
+    this.log_username = document.getElementById('logged-user');
+
+    chrome.storage.local.get(['logged_username'], function (result) {
+        this.PC.log_username.innerHTML = result.logged_username
+        console.log('Value currently is ' + result.logged_username);
+    });
+
     this.addListeners_();
 };
 
@@ -42,7 +44,7 @@ PopupController.prototype = {
 
     log_out_call: function () {
 
-        var url = "http://127.0.0.1:8000/logout"
+        var url = web_url.logout // URL REPLACE
 
         var xhttp = new XMLHttpRequest();
         xhttp.open("GET", url, true);
@@ -60,10 +62,9 @@ PopupController.prototype = {
 
 
     /**
-     * When a user clicks the button, this method is called: it reads the current
-     * state of `timeframe_` in order to pull a timeframe, then calls the clearing
-     * method with appropriate arguments.
-     *
+     * When a user clicks the button, this method is called
+     * 
+     * 
      * @private
      */
 
@@ -71,7 +72,6 @@ PopupController.prototype = {
         e.preventDefault()
         console.log("button clicked")
         this.log_out_call()
-
         return false;
     }
 
