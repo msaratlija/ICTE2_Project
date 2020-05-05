@@ -20,9 +20,17 @@ def hello_show():
 @login_usr.route('/login', methods=['GET', 'POST'])
 def login_show():
     response = authenticate_user(request)
-    if response is not None:
-        return response
+    if response:
+        return redirect(url_for('login_usr.hello_show'))
     return render_template('login.html')
+
+
+@login_usr.route('/login_extension', methods=['POST'])
+def login_extension():
+    response = authenticate_user(request)
+    if response:
+        return jsonify(result=True)
+    return jsonify(result=False)
 
 
 @login_usr.route('/sign_up', methods=['GET', 'POST'])

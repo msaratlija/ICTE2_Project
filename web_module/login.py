@@ -10,7 +10,7 @@ from .model import User
 
 def authenticate_user(request):
     if current_user.is_authenticated:
-        return redirect(url_for('login_usr.hello_show'))
+        return True
 
     if request.method == 'POST':
         username = request.form['username']  # test username "ddd"
@@ -19,10 +19,8 @@ def authenticate_user(request):
 
         if user is not None and check_password_hash(user.db_user.password_hash, password):
             login_user(user)
-            return redirect(url_for('login_usr.hello_show'))
-        else:
-            return redirect(url_for('login_usr.login_show'))
-    return None
+            return True
+    return False
 
 
 @login_manager.user_loader
