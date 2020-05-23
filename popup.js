@@ -54,6 +54,9 @@ PopupController.prototype = {
    */
   addListeners_: function () {
     this.submit_form_.addEventListener('submit', this.handleForm_.bind(this))
+    chrome.storage.local.set({ "content_script_start": false }, function () {
+      console.log('content script is set to: ' + false);
+    });
     console.log("exectuted MARKO")
   },
 
@@ -81,6 +84,12 @@ PopupController.prototype = {
         chrome.storage.local.set({ "logged_username": us_name }, function () {
           console.log('Value is set to: ' + us_name);
         });
+
+        chrome.storage.local.set({ "content_script_start": true }, function () {
+          console.log('content script is set to: ' + true);
+        });
+      }else{
+
       }
     };
   },
