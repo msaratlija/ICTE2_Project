@@ -1,20 +1,98 @@
 {% extends "base.html" %}
 {% block content %}
 
-<nav class="navbar navbar-dark border-bottom style="background-color:transparent; justify-content-between">
-  <a class="navbar-brand text-white">Consent Management</a>
-  <form class="form-inline">
-    <button class="btn btn-outline-light my-2 my-sm-0" type="submit"
-            formaction="{{ url_for('login_usr.logout') }}">Logout</button>
-  </form>
+<nav class="navbar navbar-dark border-bottom style=" background-color:transparent; justify-content-between">
+    <a class="navbar-brand text-white">Consent Management</a>
+    <form class="form-inline">
+        <p class="my-2 my-sm-0 text-white nav-name">Hello {{ first_name }}! </p>
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit"
+            formaction="{{ url_for('login_usr.logout') }}">Logout
+        </button>
+    </form>
 </nav>
+
+
+<div class="card-consent">{{ pagination.info }}
+    {{ pagination.links }}
+</div>
+
+<table>
+    <tbody>
+        {% for i in range(len) %}
+        <tr>
+            <div id="{{ buff[i]['id'] }}" class="card card-consent">
+                <div class="card-header">
+                    Consent Receipt Information
+                </div>
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ buff[i]["title" ]}}</h5>
+                    <p class="card-text">URL: <a href="{{consents[i].url}}">{{buff[i]["url"]}}</a></p>
+
+                    <div class="accordion" id="accordionExample">
+                        <div class="card">
+                            <div class="card-header" id="headingOne{{ i }}">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left" type="button"
+                                        data-toggle="collapse" data-target="#collapseOne{{ i }}" aria-expanded="false"
+                                        aria-controls="collapseOne" onclick="setPaginationText('{{ buff[i]['id'] }}')">
+                                        Consent Text Elements (click to expand)
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseOne{{i}}" class="collapse" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="page-txt">
+                                        <div class="data-container-txt"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingTwo{{i}}">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left collapsed" type="button"
+                                        data-toggle="collapse" data-target="#collapseTwo{{i}}" aria-expanded="false"
+                                        aria-controls="collapseTwo" onclick="setPaginationClicks('{{buff[i]['id']}}')">
+                                        Consent Buttons and Links (click to expand)
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseTwo{{i}}" class="collapse" aria-labelledby="headingTwo"
+                                data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="page-click">
+                                        <div class="data-container-click"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-outline-danger button-consent"
+                        onclick="deleteConsentEntry('{{buff[i]['id']}}')">Delete Consent Entry
+                    </button>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">{{buff[i]["date_created"].strftime("%Y-%m-%d %H:%M")}}</small>
+                </div>
+
+            </div>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="card-consent">
+    {{ pagination.links }}
+</div>
 
 <div class='container'>
     <div class="row d-flex justify-content-center text-center min-vh-100 align-items-center">
         <div class="col4">
-                <h3 class="text-white"> Welcome!</h3>
+            <h3 class="text-white"> Welcome!</h3>
         </div>
     </div>
-
 </div>
 {% endblock %}

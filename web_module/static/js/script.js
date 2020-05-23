@@ -72,7 +72,6 @@
 
           });
         }
-
         form.classList.add('was-validated');
       }, false);
     });
@@ -101,5 +100,93 @@ function unhidden_element($el) {
   $el.addClass('unhidden');
 }
 
+function deleteConsentEntry(consent_id) {
+  var x = document.getElementById(consent_id);
+  $.post("/delete_consent", { id: consent_id }, function (data) {
+    if (data.result === true) {
+      console.log("delete")
+      x.style.display = "none";
+    }
+  });
+}
+
+function setPaginationText(consent_id) {
+  $.extend($.fn.pagination.defaults, {
+    className: 'paginationjs-theme-blue'
+  })
+
+  $.post("/text_total", { id: consent_id }, function (data) {
+    txtTotalNum = data
+    endPoint = "/text_elements"
+    field = "text_elements"
+    select_id = "txt"
+    page_size = 2
+    paginationRequest(txtTotalNum, consent_id, endPoint, field, select_id, page_size)
+  });
+}
 
 
+function setPaginationClicks(consent_id) {
+  $.extend($.fn.pagination.defaults, {
+    className: 'paginationjs-theme-blue'
+  })
+
+  $.post("/click_total", { id: consent_id }, function (data) {
+    clickTotalNum = data
+    endPoint = "/click_elements"
+    field = "click_elements"
+    type_id = "click"
+    page_size = 10
+    paginationRequest(clickTotalNum, consent_id, endPoint, field, type_id, page_size)
+  });
+}
+
+
+function paginationRequest(tot, con_id, endpoint, field, type_id, page_size) {
+  $('.page-' + type_id).pagination({
+    dataSource: endpoint,
+    locator: field,
+    totalNumber: tot,
+    pageSize: page_size,
+
+    ajax: {
+      data: { consent_id: con_id },
+      type: 'POST',
+      beforeSend: function () {
+        $('.data-container' + type_id).html('Loading data from database ...')
+      }
+    },
+    callback: function (data, pagination) {
+      var html = ""
+      if (type_id == "txt")
+        html = textTemplating(data);
+      else
+        html = clickTemplating(data)
+      $('.data-container-' + type_id).html(html);
+    }
+  })
+}
+
+function textTemplating(data) {
+  var html = '<ul>';
+  $.each(data, function (index, item) {
+    html += '<li>' + item + '</li>';
+  });
+  html += '</ul>';
+  return html;
+}
+
+function clickTemplating(data) {
+  var html = '<p>';
+  $.each(data, function (index, item) {
+    if (item.type == "")
+      item.type = "link"
+
+    html += 'Type: <b>' + item.type
+      + '</b>, Text: ' + item.text
+      + ', Clicked: <b>' + item.clicked
+      + '</b>, <a href=\\"' + item.url + '\\">' + item.url + '</a><br>'
+  });
+  html += '</p>';
+  return html;
+}

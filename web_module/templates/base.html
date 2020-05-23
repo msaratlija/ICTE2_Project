@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Flask app</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
@@ -10,8 +10,9 @@
 
 {% block content %}{% endblock %}
 
-<script type="text/javascript" src="{{ url_for('static', filename='js/vendor/jquery-3.4.1.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/vendor/bootstrap.bundle.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/vendor/jquery-3.5.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/vendor/bootstrap.bundle.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/vendor/pagination.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
