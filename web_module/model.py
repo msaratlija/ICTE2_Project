@@ -15,6 +15,16 @@ class UserDB(UserMixin, Document):
     meta = {'collection': Config.DB_COLL_USERS}
 
 
+class Consent(Document):
+    user = ReferenceField(UserDB)
+    title = StringField()
+    url = StringField()
+    text_elements = ListField(StringField())
+    click_elements = ListField(DictField())
+    date_created = DateTimeField(required=True)
+    meta = {'collection': 'consents'}
+
+
 class User(UserMixin):
     def __init__(self, db_user=None):
         self.db_user = db_user
@@ -29,6 +39,9 @@ class User(UserMixin):
 
     def is_authenticated(self):
         return True
+
+    def get_id(self):
+        return str(self.id)
 
     def get_by_id(self, user_id):
         db_user = UserDB.objects.get(id=user_id)
